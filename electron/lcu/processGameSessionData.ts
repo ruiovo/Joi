@@ -46,16 +46,18 @@ export async function processGameSessionData(data: ChampSelectPhaseSession, game
 		logger.info("currentAction", JSON.stringify(action));
 		//todo 自动选择英雄 自动ban英雄
 	}
-
+	
 	//获取当前锁定的英雄
-	const currentChampId = await getCurrentChampId().catch(() => {
-		return 0;
+	const currentChampSession = await getCurrentChampId().catch(() => {
+		return null;
 	});
+	const currentChampId = currentChampSession?.championId;
 	logger.info("currentChampId: ", currentChampId);
 	//发送给前台自动设置符文
 	if (currentChampId && currentChampId !== champId) {
 		champId = currentChampId;
 		//showMainWindow({ name: "inGame" });
+		logger.info("send to web content ");
 		sendToWebContent(Handle.champSelect, currentChampId);
 	}
 }

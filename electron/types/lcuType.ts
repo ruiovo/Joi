@@ -705,3 +705,9 @@ export interface TeamMemberInfo {
 	score?: number;
   note?: PlayerNote
 }
+
+export interface SelectChampSession{
+	assignedPosition:string
+	cellid:number,
+	championId:number
+}

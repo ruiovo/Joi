@@ -9,6 +9,7 @@ import {
 	LobbyMember,
 	MatchHistoryQueryResult,
 	RPC,
+	SelectChampSession,
 	SummonerInfo
 } from "../types/lcuType";
 import logger from "../lib/logger";
@@ -80,9 +81,10 @@ export function listenChampSelect(callback?: Function): Function {
 
 // 获取当前选择的英雄
 export async function getCurrentChampId() {
-	return await httpRequest<number>({
+	return await httpRequest<SelectChampSession>({
 		method: "GET",
-		url: "/lol-champ-select/v1/current-champion"
+		url: "/lol-champ-select/v1/session/my-selection"
+		// url : "/lol-champ-select/v1/current-champion"
 	});
 }
 
